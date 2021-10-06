@@ -4,7 +4,8 @@
   "description": "an api to handle a library with multiple features",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --coverage"
+    "test": "jest --watchAll --coverage",
+    "test:watch": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
