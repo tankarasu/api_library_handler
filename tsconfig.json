@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "strictNullChecks": true,
+    "target": "ES2015",
+    "module": "ES2015",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "rootDir": "./",
+    "typeRoots": [
+      "node_modules/@types",
+      "./types"
+    ],
+    "types": [
+      "node",
+      "jest"
+    ],
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ]
+    },
+    "strict": true,
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src",
+    "./test"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ]
+}
