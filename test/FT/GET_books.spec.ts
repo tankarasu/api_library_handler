@@ -7,7 +7,7 @@ import { fakeDatabase } from "../../src/server";
 
 // CONSTANTS & variable declarations
 const method = "GET";
-const url = "/allbook";
+const url = "/books";
 let testedServer: FastifyInstance;
 
 beforeAll(async() => {
@@ -21,9 +21,9 @@ afterAll(async() => {
 
 describe("GET suite",()=>{
   test(`
-    GIVEN 'http://localhost:8080/allbook' route method = GET
+    GIVEN 'http://localhost:8080/books' route method = GET
     WHEN request is sent
-    THEN should return the string 'Hello World'
+    THEN should return the expected string
   `,
   async()=>{
     const response = await testedServer.inject({

@@ -2,13 +2,14 @@
   "name": "api_library_handler",
   "version": "1.0.0",
   "description": "an api to handle a library with multiple features",
-  "main": "index.js",
+  "main": "./dist/src/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest --watchAll --coverage",
     "test:watch": "jest --watchAll"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tan KARASU - karasutan@gmail.com",
   "license": "MIT",
   "dependencies": {
     "fastify": "^3.22.0",

@@ -12,7 +12,7 @@ export const fakeDatabase = [
 export function buildServer(options = {}): FastifyInstance{
   const server = Fastify(options)
   // Routes
-  server.get('/allbook', getAllBook)
+  server.get('/books', getAllBook)
 
   return server
 }
