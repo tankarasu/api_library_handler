@@ -3,7 +3,7 @@ import { FastifyInstance } from "fastify";
 
 // Internal Requirements
 import { buildServer } from "../../src/server";
-import { fakeDatabase } from "../../src/server";
+import { fakeDatabase } from "../../src/utils/fakeDatabase";
 
 // CONSTANTS & variable declarations
 const method = "GET";
@@ -23,7 +23,7 @@ describe("GET suite",()=>{
   test(`
     GIVEN 'http://localhost:8080/books' route method = GET
     WHEN request is sent
-    THEN should return the expected string
+    THEN should return all the books in the library
   `,
   async()=>{
     const response = await testedServer.inject({
@@ -34,4 +34,18 @@ describe("GET suite",()=>{
     expect(response.payload).toBe(JSON.stringify(fakeDatabase))
   })
 
+  test(`
+    GIVEN 'http://localhost:8080/books/2' route method = GET
+    WHEN request is sent
+    THEN should return the books with id = 2
+  `,
+  async()=>{
+    const response = await testedServer.inject({
+      method,
+      url:`/books/2`
+    })
+
+    expect(response.payload).toBe(JSON.stringify(fakeDatabase[1]))
+  }
+  )
 })
