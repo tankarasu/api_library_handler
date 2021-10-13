@@ -4,18 +4,13 @@ import Fastify, { FastifyInstance, FastifyRequest, RouteHandlerMethod } from "fa
 // Internal requirements
 import { fakeDatabase } from "./utils/fakeDatabase";
 import { Book, BookRequest} from "./types/types"
-
+import { apiRoutes } from "./api";
 // Function
 export function buildServer(options = {}): FastifyInstance{
   const server = Fastify(options)
+  server.register(apiRoutes, { prefix: "/api" })
 
   // Routes
-  server.get('/books', getAllBook)
-  server.get('/book/:id', getBookById as unknown as RouteHandlerMethod)
-  server.get('/bookcategory', getBookByCategory as unknown as RouteHandlerMethod)
-  server.get('/bookname', getBookByName as unknown as RouteHandlerMethod)
-  server.get('/bookauthor', getBookByAuthor as unknown as RouteHandlerMethod)
-  server.get('/bookyear', getBookByYear as unknown as RouteHandlerMethod)
   server.get('/bookstartwith', bookStartWithLetter as unknown as RouteHandlerMethod)
   server.get('/statistics', getStatistics as unknown as RouteHandlerMethod)
   server.get('/howmanytime', howManyTimeTaken as unknown as RouteHandlerMethod)
@@ -32,61 +27,6 @@ export function buildServer(options = {}): FastifyInstance{
   server.delete('/deletebook', deleteBook as unknown as RouteHandlerMethod)
 
   return server
-}
-
-async function getAllBook(): Promise<Book[]>{
-  return fakeDatabase
-}
-
-async function getBookById(request: FastifyRequest<BookRequest>): Promise<Book | ErrorConstructor>{
-  const { id } = request.params
-  const book: Book | undefined = fakeDatabase.find(book => book.id === Number(id))
-
-  if(!book){
-    throw new Error("No book found")
-  }
-
-  return book
-}
-
-async function getBookByName(request: FastifyRequest<BookRequest>): Promise<Book[]>{
-  const { name } = request.query
-  const books: Book[] = fakeDatabase.filter(book => book.name === name)
-
-  if(books.length === 0){
-    throw new Error('No Book found')
-  }
-  return books
-}
-
-async function getBookByCategory(request: FastifyRequest<BookRequest>): Promise<Book[]>{
-  const { category } = request.query
-  const books: Book[] = fakeDatabase.filter(book => book.category === category)
-
-  if(books.length === 0){
-    throw new Error('No Book found')
-  }
-  return books
-}
-
-async function getBookByAuthor(request: FastifyRequest<BookRequest>): Promise<Book[]>{
-  const { author } = request.query
-  const books: Book[] = fakeDatabase.filter(book => book.author === author)
-
-  if(books.length === 0){
-    throw new Error('No Book found')
-  }
-  return books
-}
-
-async function getBookByYear(request: FastifyRequest<BookRequest>): Promise<Book[]>{
-  const { year } = request.query
-  const books: Book[] = fakeDatabase.filter(book => book.year === Number(year))
-
-  if(books.length === 0){
-    throw new Error('No Book found')
-  }
-  return books
 }
 
 async function addOneBook(request: FastifyRequest<BookRequest>): Promise<Book[]>{
