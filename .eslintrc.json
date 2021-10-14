@@ -1,0 +1,151 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true
+    }
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "no-compare-neg-zero": "error",
+    "no-const-assign": "error",
+    "no-duplicate-imports": "error",
+    "no-self-assign": "error",
+    "no-unreachable": "error",
+    // |--------------------------------|
+    // |              ES6               |
+    // |--------------------------------|
+    "prefer-const": "error",
+    "prefer-destructuring": "error",
+    "no-var": "error",
+    "yield-star-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    // |--------------------------------|
+    // |         Best Practises         |
+    // |--------------------------------|
+    "no-multi-spaces": "error",
+    // |--------------------------------|
+    // |            Styles              |
+    // |--------------------------------|
+    "block-spacing": "error",
+    "camelcase": "error",
+    "no-trailing-spaces": "warn",
+    "no-inline-comments": "error",
+    "sort-imports": "off",
+    "sort-keys": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 110,
+        "comments": 110
+      }
+    ],
+    "brace-style": [
+      "error",
+      "stroustrup"
+    ],
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "semi-style": [
+      "error",
+      "last"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "switch-colon-spacing": [
+      "error",
+      {
+        "after": true,
+        "before": false
+      }
+    ],
+    "space-in-parens": [
+      "error",
+      "never"
+    ],
+    "spaced-comment": [
+      "error",
+      "always"
+    ],
+    // |--------------------------------|
+    // |          Variables             |
+    // |--------------------------------|
+    "init-declarations": "error",
+    "no-delete-var": "error",
+    "no-label-var": "error",
+    "no-undef": "error",
+    "no-undefined": "error",
+    "no-restricted-globals": "error",
+    "no-unused-vars": "error",
+    "no-undef-init": "warn",
+    "no-shadow": "off",
+    "no-shadow-restricted-names": "error",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": true,
+        "classes": true
+      }
+    ],
+    // |--------------------------------|
+    // |         Typescript             |
+    // |--------------------------------|
+    // ALL DOCS: https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-explicit-any": [
+      "error",
+      {
+        "ignoreRestArgs": true
+      }
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  },
+  "overrides": [
+    {
+      "files": [
+        "*-test.js",
+        "*.spec.js"
+      ],
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    }
+  ]
+}
