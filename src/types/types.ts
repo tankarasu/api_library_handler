@@ -1,17 +1,19 @@
 // Third-party requirements
 import { RouteGenericInterface } from "fastify/types/route";
 
+export type kBookType = "roman" | "thriller" | "drama" | "cartoon"
+
 export interface Book{
   id: number,
   name: string,
-  category: string,
+  category: kBookType,
   author: string,
   year: number,
 }
 
 export interface BookRequest extends RouteGenericInterface{
   Querystring: {
-    category?: string
+    category?: kBookType
     name?: string
     author?: string
     year?: string
@@ -19,11 +21,4 @@ export interface BookRequest extends RouteGenericInterface{
   Params: {
     id: string
   }
-}
-
-export enum kBookType{
-  ROMAN = 'roman',
-  THRILLER = 'thriller',
-  DRAMA = 'drama',
-  CARTOON = 'cartoon'
 }

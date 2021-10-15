@@ -140,11 +140,18 @@
   "overrides": [
     {
       "files": [
-        "*-test.js",
-        "*.spec.js"
+        "*-test.ts",
+        "*.spec.ts"
       ],
       "rules": {
-        "no-unused-expressions": "off"
+        "no-unused-expressions": "off",
+        "max-len": [
+          "error",
+          {
+            "code": 120,
+            "comments": 120
+          }
+        ]
       }
     }
   ]
