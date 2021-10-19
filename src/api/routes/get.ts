@@ -4,13 +4,10 @@ import { FastifyInstance } from "fastify";
 // Internal requirements
 import * as controller from "../controllers/getController";
 
+// TODO find a better name for function
 export async function get(server: FastifyInstance):Promise<void> {
-  server.get("/", controller.getAllBooks);
-  server.get("/:id", controller.getBookById);
-  server.get("/category", controller.getBookByCategory);
-  server.get("/author", controller.getBookByAuthor);
-  server.get("/name", controller.getBookByName);
-  server.get("/year", controller.getBookByYear);
+  server.get("/", controller.getBooksWithFilters);
   server.get("/statistics", controller.getStatistics);
   server.get("/percentage", controller.percentageTypeBook);
+  // server.get("/search", controller.searchInsideAllBook);
 }

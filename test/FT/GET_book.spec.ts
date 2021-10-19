@@ -35,15 +35,16 @@ describe("GET all books test suite", () => {
 describe("GET all books by ID test suite", () => {
   const kNonExistingBookId = 44;
   const kExistingBookId = 2;
+
   test(`
-    GIVEN 'http://localhost:8080/api/book/4' route method = GET
+    GIVEN 'http://localhost:8080/api/book?id=${kNonExistingBookId}' route method = GET
     WHEN request is sent with a non-existing book ID
     THEN should return an error message
   `,
   async () => {
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/${kNonExistingBookId}`
+      url: `${kBaseURL}?id=${kNonExistingBookId}`
     });
 
     const responseObject = JSON.parse(response.payload);
@@ -55,17 +56,17 @@ describe("GET all books by ID test suite", () => {
   });
 
   test(`
-    GIVEN 'http://localhost:8080/api/book/2' route method = GET
+    GIVEN 'http://localhost:8080/api/book?id=${kExistingBookId}' route method = GET
     WHEN request is sent
     THEN should return the books with id = 2
   `,
   async () => {
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/${kExistingBookId}`
+      url: `${kBaseURL}?id=${kExistingBookId}`
     });
 
-    const expectedResult = JSON.stringify(DB.filter(book => book.id === kExistingBookId)[0]);
+    const expectedResult = JSON.stringify(DB.filter(book => book.id === kExistingBookId));
 
     expect(response.payload).toBe(expectedResult);
   });
@@ -76,14 +77,14 @@ describe("GET all book by category", () => {
   const kInvalidCategory = "non-existing-category";
 
   test(`
-    GIVEN 'http://localhost:8080/api/book/category/?category=roman' route method = GET
+    GIVEN 'http://localhost:8080/api/book/?category=${kInvalidCategory}' route method = GET
     WHEN request is sent with a non-existing category
     THEN should return an error message
   `,
   async () => {
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/category?category=${kInvalidCategory}`
+      url: `${kBaseURL}?category=${kInvalidCategory}`
     });
 
     const responseObject = JSON.parse(response.payload);
@@ -95,14 +96,14 @@ describe("GET all book by category", () => {
   });
 
   test(`
-    GIVEN 'http://localhost:8080/api/book/category/?category=roman' route method = GET
+    GIVEN 'http://localhost:8080/api/book?category=${kValidCategory}' route method = GET
     WHEN request is sent with a valid category => 'roman'
     THEN should return all books with category = roman
   `,
   async () => {
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/category?category=${kValidCategory}`
+      url: `${kBaseURL}?category=${kValidCategory}`
     });
 
     const expectedResult = JSON.stringify(DB.filter(book => book.category === kValidCategory));
@@ -117,14 +118,14 @@ describe("GET all books by author", () => {
 
   // TODO use case with e é è
   test(`
-    GIVEN 'http://localhost:8080/api/book/author/?author=Molière' route method = GET
+    GIVEN 'http://localhost:8080/api/book/?author=Molière' route method = GET
     WHEN request is sent
     THEN should return all books with author = Molière
   `,
   async () => {
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/author?author=${kExistingAuthor}`
+      url: `${kBaseURL}?author=${kExistingAuthor}`
     });
 
     const expectedResult = JSON.stringify(DB.filter(book => book.author === "Molière"));
@@ -133,14 +134,14 @@ describe("GET all books by author", () => {
   });
 
   test(`
-    GIVEN 'http://localhost:8080/api/book/author/?author=Molière' route method = GET
+    GIVEN 'http://localhost:8080/api/book?author=Molière' route method = GET
     WHEN request is sent
     THEN should return all books with author = Molière
   `,
   async () => {
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/author?author=${kNonExistingAuthor}`
+      url: `${kBaseURL}?author=${kNonExistingAuthor}`
     });
 
     const responseObject = JSON.parse(response.payload);
@@ -153,16 +154,18 @@ describe("GET all books by author", () => {
 });
 
 describe("GET book by name suite", () => {
+  const kNonExistingBookName = "non-existing-book-name";
+  const kExistingBookName = "Don Quichotte";
+
   test(`
-    GIVEN 'http://localhost:8080/api/book/name' route method = GET
+    GIVEN 'http://localhost:8080/api/book?name=${kNonExistingBookName}' route method = GET
     WHEN request is sent on existing book name
     THEN should return all books with expected name
   `,
   async () => {
-    const kNonExistingBookName = "non-existing-book-name";
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/name?name=${kNonExistingBookName}`
+      url: `${kBaseURL}?name=${kNonExistingBookName}`
     });
 
     const responseObject = JSON.parse(response.payload);
@@ -174,37 +177,36 @@ describe("GET book by name suite", () => {
   });
 
   test(`
-    GIVEN 'http://localhost:8080/api/book/name' route method = GET
+    GIVEN 'http://localhost:8080/api/book?name${kExistingBookName}' route method = GET
     WHEN request is sent on existing book name
     THEN should return all books with expected name
   `,
   async () => {
-    const KValidBookname = "Don Quichotte";
 
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/name?name=${KValidBookname}`
+      url: `${kBaseURL}?name=${kExistingBookName}`
     });
 
-    const expectedResult = JSON.stringify(DB.filter(book => book.name === "Don Quichotte"));
+    const expectedResult = JSON.stringify(DB.filter(book => book.name === kExistingBookName));
 
     expect(response.payload).toBe(expectedResult);
   });
 });
 
 describe("GET books by year suite", () => {
-  const kValidBookYear = 1862;
+  const kExistingBookYear = 1862;
   const kNonExistingBookYear = 1664;
 
   test(`
-    GIVEN 'http://localhost:8080/api/book/year' route method = GET
-    WHEN request is sent on existing book year
-    THEN should return all books with expected year
+    GIVEN 'http://localhost:8080/api/book?${kNonExistingBookYear}' route method = GET
+    WHEN request is sent on non-existing book year
+    THEN should return an Error
   `,
   async () => {
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/year?year=${kNonExistingBookYear}`
+      url: `${kBaseURL}?year=${kNonExistingBookYear}`
     });
 
     const responseObject = JSON.parse(response.payload);
@@ -216,17 +218,17 @@ describe("GET books by year suite", () => {
   });
 
   test(`
-    GIVEN 'http://localhost:8080/api/book/year' route method = GET
+    GIVEN 'http://localhost:8080/api/book?year=${kExistingBookYear}' route method = GET
     WHEN request is sent on existing book year
     THEN should return all books with expected year
   `,
   async () => {
     const response = await testedServer.inject({
       method,
-      url: `${kBaseURL}/year?year=${kValidBookYear}`
+      url: `${kBaseURL}?year=${kExistingBookYear}`
     });
 
-    const expectedResult = JSON.stringify(DB.filter(book => book.year === kValidBookYear));
+    const expectedResult = JSON.stringify(DB.filter(book => book.year === kExistingBookYear));
 
     expect(response.payload).toBe(expectedResult);
   });

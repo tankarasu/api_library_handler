@@ -5,7 +5,7 @@ import { Book } from "../types/types";
 // CONSTANTS
 export const fakeDatabase: Book[] = [
   { name: "Roméo & Juliet", id: 1, category: "drama", author: "William Shakespeare", year: 1595 },
-  { name: "Les misérables", id: 2, category: "roman", author: "Victor Hugo", year: 1862 },
+  { name: "les misérables", id: 2, category: "roman", author: "Victor Hugo", year: 1862 },
   { name: "Le Petit Prince", id: 3, category: "drama", author: "Antoine de Saint-Exupéry", year: 1943 },
   { name: "Le Rouge et le Noir", id: 4, category: "roman", author: "Arthur Conan Doyle", year: 1890 },
   { name: "Le Dernier Jour", id: 5, category: "roman", author: "Alexandre Dumas", year: 1842 },

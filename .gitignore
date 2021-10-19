@@ -121,3 +121,6 @@ dist
 reminder.md
 .vscode
 coverage/
+temp/
+testFile.spec.ts
+docs/

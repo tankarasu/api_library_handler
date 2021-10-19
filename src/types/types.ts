@@ -11,14 +11,24 @@ export interface Book{
   year: number,
 }
 
-export interface BookRequest extends RouteGenericInterface{
-  Querystring: {
-    category?: kBookType
-    name?: string
-    author?: string
-    year?: string
+export type Filters = {
+    id?: string | number;
+    author?: string;
+    category?: string;
+    name?: string;
+    year?: string | number;
   }
+
+export interface BookRequest extends RouteGenericInterface{
+  Querystring: Filters;
   Params: {
     id: string
   }
+}
+
+export type BookStatistic = { [key in kBookType as key]: number };
+
+export interface Statistic {
+  totalBooks: number;
+  totalBooksByCategory: BookStatistic;
 }
