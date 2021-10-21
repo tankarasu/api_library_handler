@@ -1,9 +1,9 @@
 // Internal requirements
-import { buildServer } from "./server";
+import {buildServer} from "./server";
 
 // Constants
 const port = 8080;
-const server = buildServer({ logger: true });
+const server = buildServer({logger: true});
 
 // Running server
 try {

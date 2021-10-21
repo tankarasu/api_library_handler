@@ -1,5 +1,5 @@
 // Third-party requirements
-import { RouteGenericInterface } from "fastify/types/route";
+import {RouteGenericInterface} from "fastify/types/route";
 
 export type kBookType = "roman" | "thriller" | "drama" | "cartoon"
 

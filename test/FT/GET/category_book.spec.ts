@@ -1,16 +1,18 @@
+/* eslint-disable no-undef */
+
 // Third-Party requirement
-import { FastifyInstance } from "fastify";
+import {FastifyInstance} from "fastify";
 
 // Internal Requirements
-import { buildServer } from "../../../src/server";
-import { fakeDatabase as DB } from "../../../src/utils/fakeDatabase";
+import {buildServer} from "../../../src/server";
+import {fakeDatabase as DB} from "../../../src/utils/fakeDatabase";
 
 // CONSTANTS & variable declarations
 const method = "GET";
 const kBaseURL = "api/book";
 const testedServer: FastifyInstance = buildServer();
 
-afterAll(async () => {
+afterAll(async() => {
   await testedServer.close();
 });
 
@@ -23,14 +25,14 @@ describe("GET all book by category", () => {
     WHEN request is sent with a non-existing category
     THEN should return an error message
   `,
-    async () => {
+    async() => {
       const response = await testedServer.inject({
         method,
         url: `${kBaseURL}?category=${kInvalidCategory}`
       });
 
       const responseObject = JSON.parse(response.payload);
-      const { message, error, statusCode } = responseObject;
+      const {message, error, statusCode} = responseObject;
 
       expect(message).toBe("No book found");
       expect(error).toBe("Internal Server Error");
@@ -42,7 +44,7 @@ describe("GET all book by category", () => {
     WHEN request is sent with a valid category => 'roman'
     THEN should return all books with category = roman
   `,
-    async () => {
+    async() => {
       const response = await testedServer.inject({
         method,
         url: `${kBaseURL}?category=${kValidCategory}`

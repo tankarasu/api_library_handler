@@ -1,16 +1,18 @@
-// Internals requirements
-import { fakeDatabase } from "../../src/utils/fakeDatabase";
-import { getFilteredDB } from "../../src/api/DB";
+/* eslint-disable no-undef */
 
-describe('getFilteredDB tests suite',()=>{
+// Internals requirements
+import {fakeDatabase} from "../../src/utils/fakeDatabase";
+import {getFilteredDB} from "../../src/api/DB";
+
+describe("getFilteredDB tests suite", () => {
   test(`
     GIVEN 0 paramaters to the function's options
     WHEN function is called
     THEN should return entire DB
   `,
   async() => {
-    expect(getFilteredDB()).toMatchObject(fakeDatabase)
-  })
+    expect(getFilteredDB()).toMatchObject(fakeDatabase);
+  });
 
   test(`
     GIVEN 1 paramaters to the function's options
@@ -19,12 +21,12 @@ describe('getFilteredDB tests suite',()=>{
   `,
   async() => {
     const DB = fakeDatabase;
-    const kExistingBookId = 1
+    const kExistingBookId = 1;
     const expectedResult = DB.filter(book => book.id === kExistingBookId);
-    const options = {id: 1}
+    const options = {id: 1};
 
-    expect(getFilteredDB(options)).toMatchObject(expectedResult)
-  })
+    expect(getFilteredDB(options)).toMatchObject(expectedResult);
+  });
 
   test(`
   GIVEN 1 paramaters to the function's options
@@ -33,12 +35,12 @@ describe('getFilteredDB tests suite',()=>{
   `,
   async() => {
     const DB = fakeDatabase;
-    const kExistingBookAuthor = "Molière"
+    const kExistingBookAuthor = "Molière";
     const expectedResult = DB.filter(book => book.author === kExistingBookAuthor);
-    const options = {author: "Molière"}
+    const options = {author: "Molière"};
 
-    expect(getFilteredDB(options)).toMatchObject(expectedResult)
-  })
+    expect(getFilteredDB(options)).toMatchObject(expectedResult);
+  });
 
   test(`
   GIVEN 2 paramaters to the function's options
@@ -46,14 +48,14 @@ describe('getFilteredDB tests suite',()=>{
     THEN should return all BOOKs with author = Molière
     `,
   async() => {
-    const kExistingBookId = 11
+    const kExistingBookId = 11;
     const DB = fakeDatabase;
-    const kExistingBookAuthor = "Molière"
+    const kExistingBookAuthor = "Molière";
     const expectedResult = DB.filter(book => {
-      return book.author === kExistingBookAuthor && book.id === kExistingBookId
+      return book.author === kExistingBookAuthor && book.id === kExistingBookId;
     });
-    const options = {author: kExistingBookAuthor, id: kExistingBookId}
+    const options = {author: kExistingBookAuthor, id: kExistingBookId};
 
-    expect(getFilteredDB(options)).toMatchObject(expectedResult)
-  })
-})
+    expect(getFilteredDB(options)).toMatchObject(expectedResult);
+  });
+});

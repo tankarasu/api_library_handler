@@ -1,33 +1,34 @@
 // Third-party requirements
-import { FastifyRequest } from "fastify";
+import {FastifyRequest} from "fastify";
 
 // Internals requirement
-import { BookRequest, Book, Statistic, BookStatistic } from "../types/types";
+import {BookRequest, Book, Statistic, BookStatistic} from "../types/types";
 
-export function throwError(message: string) {
+export function throwError(message: string){
   throw new Error(message);
 }
 
-export function formatQueryString(request: FastifyRequest<BookRequest, import("http").Server, import("http").IncomingMessage>) {
-  if (request.query.id) {
+export function formatQueryString(
+  request: FastifyRequest<BookRequest>){
+  if(request.query.id) {
     request.query.id = parseInt(request.query.id as string);
   }
 
-  if (request.query.year) {
+  if(request.query.year) {
     request.query.year = parseInt(request.query.year as string);
   }
 }
 
-export function countBookByCategory(database: Array<Book>, statistics: Statistic) {
+export function countBookByCategory(database: Array<Book>, statistics: Statistic){
   const {
     totalBooksByCategory: booksQuantity
   } = statistics;
 
   database.reduce((acc, cur) => {
-    const { category } = cur;
+    const {category} = cur;
     statistics.totalBooks++;
 
-    if (booksQuantity[category]) {
+    if(booksQuantity[category]) {
       booksQuantity[category]++;
     }
     else {
@@ -37,9 +38,10 @@ export function countBookByCategory(database: Array<Book>, statistics: Statistic
     return acc;
   }, {});
 
-  const {totalBooksByCategory, totalBooks, percentageByCategory} = statistics
+  const {totalBooksByCategory, totalBooks, percentageByCategory} = statistics;
 
-  for(const type in totalBooksByCategory){
-    percentageByCategory[<keyof BookStatistic>type] = Math.round(totalBooksByCategory[<keyof BookStatistic>type] / totalBooks * 100)
+  for(const type in totalBooksByCategory) {
+    const label = <keyof BookStatistic>type;
+    percentageByCategory[label] = Math.round(totalBooksByCategory[label] / totalBooks * 100);
   }
 }

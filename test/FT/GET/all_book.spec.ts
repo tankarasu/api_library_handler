@@ -1,16 +1,18 @@
+/* eslint-disable no-undef */
+
 // Third-Party requirement
-import { FastifyInstance } from "fastify";
+import {FastifyInstance} from "fastify";
 
 // Internal Requirements
-import { buildServer } from "../../../src/server";
-import { fakeDatabase as DB } from "../../../src/utils/fakeDatabase";
+import {buildServer} from "../../../src/server";
+import {fakeDatabase as DB} from "../../../src/utils/fakeDatabase";
 
 // CONSTANTS & variable declarations
 const method = "GET";
 const kBaseURL = "api/book";
 const testedServer: FastifyInstance = buildServer();
 
-afterAll(async () => {
+afterAll(async() => {
   await testedServer.close();
 });
 
@@ -20,7 +22,7 @@ describe("GET all books test suite", () => {
     WHEN request is sent
     THEN should return all the books in the library
   `,
-    async () => {
+    async() => {
       const response = await testedServer.inject({
         method,
         url: kBaseURL

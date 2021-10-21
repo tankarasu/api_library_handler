@@ -6,9 +6,7 @@
     "node": true
   },
   "extends": [
-    "standard",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "eslint:recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -27,17 +25,58 @@
       {
         "anonymous": "always",
         "named": "never",
-        "asyncArrow": "always"
+        "asyncArrow": "never"
       }
     ],
     "no-compare-neg-zero": "error",
+    "no-regex-spaces": "error",
+    "template-tag-spacing": [
+      "error",
+      "never"
+    ],
+    "space-infix-ops": "error",
+    "space-unary-ops": [
+      "error",
+      {
+        "words": true,
+        "nonwords": false,
+        "overrides": {
+          "++": false
+        }
+      }
+    ],
+    "template-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "generator-star-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "space-before-blocks": ["error",{
+        "functions": "never",
+        "keywords": "always",
+        "classes": "never"
+      }],
+    "rest-spread-spacing": [
+      "error",
+      "never"
+    ],
     "no-const-assign": "error",
     "no-duplicate-imports": "error",
     "no-self-assign": "error",
+    "no-irregular-whitespace": "error",
     "no-unreachable": "error",
-    // |--------------------------------|
-    // |              ES6               |
-    // |--------------------------------|
     "prefer-const": "error",
     "prefer-destructuring": "error",
     "no-var": "error",
@@ -48,16 +87,49 @@
         "after": true
       }
     ],
-    // |--------------------------------|
-    // |         Best Practises         |
-    // |--------------------------------|
     "no-multi-spaces": "error",
-    // |--------------------------------|
-    // |            Styles              |
-    // |--------------------------------|
+      "func-call-spacing": [
+        "error",
+        "never"
+      ],
+    "array-bracket-spacing": ["error", "never"],
+    "key-spacing": [
+      "error",
+      {
+        "beforeColon": false
+      }
+    ],
+    "computed-property-spacing": [
+          "error",
+          "never"
+      ],
+    "no-useless-constructor": "error",
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true,
+        "overrides": {
+          "if": {
+            "after": false
+          },
+          "for": {
+            "after": false
+          },
+          "while": {
+            "after": false
+          }
+        }
+      }
+    ],
+    "no-whitespace-before-property": "error",
+    "object-curly-spacing": [
+      "error",
+      "never"
+    ],
     "block-spacing": "error",
     "camelcase": "error",
-    "no-trailing-spaces": "warn",
+    "no-trailing-spaces": "error",
     "no-inline-comments": "error",
     "newline-before-return": "error",
     "sort-imports": "off",
@@ -107,9 +179,6 @@
       "error",
       "always"
     ],
-    // |--------------------------------|
-    // |          Variables             |
-    // |--------------------------------|
     "init-declarations": "error",
     "no-delete-var": "error",
     "no-label-var": "error",
@@ -127,10 +196,6 @@
         "classes": true
       }
     ],
-    // |--------------------------------|
-    // |         Typescript             |
-    // |--------------------------------|
-    // ALL DOCS: https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-explicit-any": [
       "error",
@@ -140,9 +205,7 @@
     ],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-empty-interface": "error",
-    "@typescript-eslint/no-inferrable-types": "error",
-    "@typescript-eslint/prefer-nullish-coalescing": "error",
-    "@typescript-eslint/strict-null-check": "error"
+    "@typescript-eslint/no-inferrable-types": "error"
   },
   "overrides": [
     {

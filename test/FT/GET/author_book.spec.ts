@@ -1,16 +1,18 @@
+/* eslint-disable no-undef */
+
 // Third-Party requirement
-import { FastifyInstance } from "fastify";
+import {FastifyInstance} from "fastify";
 
 // Internal Requirements
-import { buildServer } from "../../../src/server";
-import { fakeDatabase as DB } from "../../../src/utils/fakeDatabase";
+import {buildServer} from "../../../src/server";
+import {fakeDatabase as DB} from "../../../src/utils/fakeDatabase";
 
 // CONSTANTS & variable declarations
 const method = "GET";
 const kBaseURL = "api/book";
 const testedServer: FastifyInstance = buildServer();
 
-afterAll(async () => {
+afterAll(async() => {
   await testedServer.close();
 });
 
@@ -24,7 +26,7 @@ describe("GET all books by author", () => {
     WHEN request is sent
     THEN should return all books with author = Molière
   `,
-    async () => {
+    async() => {
       const response = await testedServer.inject({
         method,
         url: `${kBaseURL}?author=${kExistingAuthor}`
@@ -40,14 +42,14 @@ describe("GET all books by author", () => {
     WHEN request is sent
     THEN should return all books with author = Molière
   `,
-    async () => {
+    async() => {
       const response = await testedServer.inject({
         method,
         url: `${kBaseURL}?author=${kNonExistingAuthor}`
       });
 
       const responseObject = JSON.parse(response.payload);
-      const { message, error, statusCode } = responseObject;
+      const {message, error, statusCode} = responseObject;
 
       expect(message).toBe("No book found");
       expect(error).toBe("Internal Server Error");
