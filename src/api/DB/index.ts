@@ -5,9 +5,13 @@ import {Book, Filters} from "../../types/types"
 export function getFilteredDB(opts?: Filters): Array<Book>{
 let result: Array<Book> = fakeDatabase
 
-  for(const filterLabel in opts){
+  for(const label in opts){
     result = result.filter(book => {
-      return book[<keyof Book>filterLabel] === opts[<keyof Filters>filterLabel]
+      const bookValue = book[<keyof Book>label]
+      const labelValue = (opts[<keyof Filters>label])
+
+      if(label !== "id") return String(bookValue).includes(String(labelValue)!)
+      else return book[<keyof Book>label] === (opts[<keyof Filters>label])
     })
   }
 

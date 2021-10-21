@@ -22,7 +22,7 @@ export type Filters = {
 export interface BookRequest extends RouteGenericInterface{
   Querystring: Filters;
   Params: {
-    id: string
+    term?: string
   }
 }
 
@@ -31,4 +31,5 @@ export type BookStatistic = { [key in kBookType as key]: number };
 export interface Statistic {
   totalBooks: number;
   totalBooksByCategory: BookStatistic;
+  percentageByCategory: BookStatistic
 }

@@ -8,6 +8,5 @@ import * as controller from "../controllers/getController";
 export async function get(server: FastifyInstance):Promise<void> {
   server.get("/", controller.getBooksWithFilters);
   server.get("/statistics", controller.getStatistics);
-  server.get("/percentage", controller.percentageTypeBook);
-  // server.get("/search", controller.searchInsideAllBook);
+  server.get("/search/:term", controller.searchInsideBook);
 }
